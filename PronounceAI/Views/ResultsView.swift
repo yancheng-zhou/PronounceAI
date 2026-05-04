@@ -18,7 +18,7 @@ struct ResultsView: View {
                 subScoresSection
                 wordAnalysisSection
                 if let selected = selectedWord {
-                    WordDetailCard(result: selected) {
+                    WordDetailCard(result: selected, sentenceContext: sentence.text) {
                         onPlayWord(selected.word)
                     }
                     .padding(.horizontal)

@@ -158,13 +158,15 @@ For each group, follow this procedure:
    - **Add to targets:** make sure **PronounceAI** is checked
 6. Click **Add**
 
-#### Models group — add these 5 files:
+#### Models group — add these 7 files:
 ```
 Models/Models.swift
 Models/SentenceLibrary.swift
 Models/SentenceLibrary+Workplace.swift
 Models/SentenceLibrary+DataExpansions.swift
 Models/SentenceLibrary+Neuroscience.swift
+Models/SentenceLibrary+SmallTalk.swift
+Models/ChineseTranslations.swift
 ```
 
 #### Services group — add these 3 files:
@@ -179,11 +181,12 @@ Services/AudioPlayer.swift
 ViewModels/PracticeViewModel.swift
 ```
 
-#### Views group — add these 3 files:
+#### Views group — add these 4 files:
 ```
 Views/HomeView.swift
 Views/PracticeView.swift
 Views/ResultsView.swift
+Views/BookView.swift
 ```
 
 #### Views/Components group — add these 3 files:
@@ -204,7 +207,9 @@ PronounceAI
     │   ├── SentenceLibrary.swift
     │   ├── SentenceLibrary+Workplace.swift
     │   ├── SentenceLibrary+DataExpansions.swift
-    │   └── SentenceLibrary+Neuroscience.swift
+    │   ├── SentenceLibrary+Neuroscience.swift
+    │   ├── SentenceLibrary+SmallTalk.swift
+    │   └── ChineseTranslations.swift
     ├── Services
     │   ├── SpeechService.swift
     │   ├── PronunciationAnalyzer.swift
@@ -215,6 +220,7 @@ PronounceAI
         ├── HomeView.swift
         ├── PracticeView.swift
         ├── ResultsView.swift
+        ├── BookView.swift
         └── Components
             ├── WaveformView.swift
             ├── ScoreRingView.swift
@@ -386,7 +392,7 @@ Azure free tier: **5 hours/month** of speech recognition, no credit card require
 - [ ] Xcode-generated ContentView.swift deleted
 - [ ] PronounceAIApp.swift content replaced
 - [ ] 5 groups created in Navigator (Models, Services, ViewModels, Views, Views/Components)
-- [ ] All 15 Swift files added to their groups with target membership checked
+- [ ] All 18 Swift files added to their groups with target membership checked
 - [ ] Microphone permission key added to Info.plist
 - [ ] Speech Recognition permission key added to Info.plist
 - [ ] Automatic signing configured with Apple ID

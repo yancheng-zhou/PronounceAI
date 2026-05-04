@@ -48,15 +48,25 @@ struct WordChip: View {
 // Expanded detail card for a selected word
 struct WordDetailCard: View {
     let result: WordResult
+    let sentenceContext: String
     let onPlayWord: () -> Void
+
+    @State private var isSaved = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: result.status.icon)
                     .foregroundStyle(statusColor)
-                Text(result.word)
-                    .font(.title3.bold())
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(result.word)
+                        .font(.title3.bold())
+                    if let meaning = WordTranslations.meaning(for: result.word) {
+                        Text(meaning)
+                            .font(.subheadline)
+                            .foregroundStyle(Color.accentColor)
+                    }
+                }
                 Spacer()
                 Button(action: onPlayWord) {
                     Image(systemName: "speaker.wave.2.fill")
@@ -126,10 +136,32 @@ struct WordDetailCard: View {
                 .frame(height: 6)
                 .animation(.easeOut(duration: 0.8), value: result.score)
             }
+
+            // Save to vocabulary (only for problem words)
+            if result.status == .mispronounced || result.status == .omitted {
+                Button {
+                    VocabularyStore.add(word: result.word, context: sentenceContext)
+                    withAnimation { isSaved = true }
+                } label: {
+                    Label(isSaved ? "Saved to Vocabulary" : "Save to Vocabulary",
+                          systemImage: isSaved ? "bookmark.fill" : "bookmark")
+                        .font(.subheadline.bold())
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(
+                            isSaved ? Color.green.opacity(0.12) : Color.accentColor.opacity(0.1),
+                            in: RoundedRectangle(cornerRadius: 10)
+                        )
+                        .foregroundStyle(isSaved ? .green : Color.accentColor)
+                }
+                .buttonStyle(.plain)
+                .disabled(isSaved)
+            }
         }
         .padding(16)
         .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+        .onAppear { isSaved = VocabularyStore.contains(word: result.word) }
     }
 
     private var statusColor: Color {

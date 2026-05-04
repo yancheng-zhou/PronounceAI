@@ -8,6 +8,8 @@ struct HomeView: View {
     @State private var selectedDifficulty: Sentence.Difficulty? = nil
     @State private var practiceSentence: Sentence?
     @State private var showHistory = false
+    @State private var showBook = false
+    @State private var showVocabulary = false
     @State private var searchText = ""
 
     var body: some View {
@@ -31,6 +33,12 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showHistory) {
                 HistoryView()
+            }
+            .sheet(isPresented: $showBook) {
+                BookView(speechService: speechService, audioPlayer: audioPlayer)
+            }
+            .sheet(isPresented: $showVocabulary) {
+                VocabularyView(speechService: speechService, audioPlayer: audioPlayer)
             }
         }
         .task {
@@ -169,6 +177,20 @@ struct HomeView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                showBook = true
+            } label: {
+                Image(systemName: "books.vertical.fill")
+            }
+        }
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                showVocabulary = true
+            } label: {
+                Image(systemName: "bookmark.fill")
+            }
+        }
         ToolbarItem(placement: .topBarTrailing) {
             Button {
                 showHistory = true

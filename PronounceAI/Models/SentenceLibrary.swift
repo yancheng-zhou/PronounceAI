@@ -9,6 +9,7 @@ struct SentenceLibrary {
         + etlIntermediate + etlAdvanced
         + cloudIntermediate + cloudAdvanced
         + neuroscienceIntermediate + neuroscienceAdvanced
+        + smallTalkBeginner + smallTalkIntermediate + smallTalkAdvanced
         + tongueTwisters
     }
 

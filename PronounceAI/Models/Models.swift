@@ -43,6 +43,7 @@ struct Sentence: Identifiable, Codable, Hashable {
         case travel = "Travel & Food"
         case dataAndAI = "Data & AI"
         case neuroscience = "Neuroscience"
+        case smallTalk = "Small Talk"
         case tongueTwisters = "Tongue Twisters"
 
         var icon: String {
@@ -53,6 +54,7 @@ struct Sentence: Identifiable, Codable, Hashable {
             case .travel: return "airplane"
             case .dataAndAI: return "chart.bar.xaxis"
             case .neuroscience: return "brain.head.profile"
+            case .smallTalk: return "bubble.left.and.bubble.right.fill"
             case .tongueTwisters: return "waveform"
             }
         }
